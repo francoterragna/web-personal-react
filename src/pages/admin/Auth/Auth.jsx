@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {Icon, image} from '../../../assets';
+import './Auth.scss';
 
 export function Auth() {
   return (
-    <div>
-        <h1> Estamos en Auth </h1>
+    <div className='auth'>
+      <Icon.foto className='logo'/>
+      <h1>Formularios de login y registro</h1>
     </div>
   )
 }
