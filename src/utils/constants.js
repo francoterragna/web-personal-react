@@ -5,6 +5,12 @@ export const ENV = {
     BASE_API: `http://${SERVER_IP}`,
     API_ROUTES: {
         REGISTER: 'auth/register',
-        LOGIN: "auth/login"
+        LOGIN: "auth/login",
+        REFRESH_ACCESS_TOKEN: 'auth/refresh_access_token',
+        USER_ME: "user/me"
+    },
+    JWT: {
+        ACCESS: "access",
+        REFRESH: "refresh"
     }
 };
