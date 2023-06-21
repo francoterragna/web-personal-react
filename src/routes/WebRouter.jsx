@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import {ClientLayout} from '../layouts'
+import { ClientLayout } from '../layouts'
 import { Home, Courses, Contact, Blog, Post } from '../pages/web';
 
 export function WebRouter() {
