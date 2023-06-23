@@ -29,7 +29,7 @@ const openLogin = () => setActiveIndex(0);
   ]
   return (
     <div className='auth'>
-      <Icon.LogoCifee className='logo'/>
+      <Icon.LogoCifeeBlack className='logo'/>
 
       <Tab
       panes={panes} 

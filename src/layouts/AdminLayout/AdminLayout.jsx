@@ -9,7 +9,7 @@ export function AdminLayout(props) {
   return (
     <div className='admin-layout'>
       <div className='admin-layout__left' >
-        <Icon.LogoCifee className='logo'/>
+        <Icon.LogoCifeeWhite className='logo'/>
         <AdminMenu/>
       </div>
       <div className='admin-layout__right' >

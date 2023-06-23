@@ -1,0 +1,38 @@
+@import '../../../../scss/index.scss';
+
+.user-form{
+    &__avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+
+        > .ui.small.avatar.image {
+            margin: 0;
+            border: 2px dashed $primary;
+            padding: 5px;
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+            object-fit: cover;
+            
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .ui.input input{
+        border: 1px solid #afafaf !important;
+      }
+
+    .ui.selection.dropdown {
+        border: 1px solid #afafaf !important;        
+    }
+
+}
+
+.ui.form .field.error input[type="text"] {
+    color: rgb(245, 22, 22) !important;
+}
