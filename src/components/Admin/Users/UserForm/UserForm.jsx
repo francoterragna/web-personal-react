@@ -2,9 +2,10 @@ import React, { useCallback } from 'react';
 import { Form, Image, Message } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import { useDropzone } from 'react-dropzone';
-import { image } from '../../../../assets';
 import { User } from '../../../../api';
 import { useAuth } from '../../../../hooks';
+import { image } from '../../../../assets';
+import { ENV } from '../../../../utils'
 import { initialValues, validationSchema } from './UserForm.form';
 import './UserForm.scss';
 
@@ -15,17 +16,27 @@ let errorFormulario = false;
 export function UserForm(props) {
     const { close, onReload, user } = props;
     const { accessToken } = useAuth();
+    // console.log(user);
+
 
     const formik = useFormik({
-      initialValues: initialValues(),
-      validationSchema: validationSchema(),
+      initialValues: initialValues(user),
+      validationSchema: validationSchema(user),
       validateOnChange: false,
       onSubmit: async (formValue) => {
         try {
-          await userController.createUser(accessToken, formValue);
+          if(!user) {
+            console.log("Estoy en el try");
+            await userController.createUser(accessToken, formValue);
+          } else {
+            await userController.updateUser(accessToken, user._id, formValue)
+            console.log(formValue);
+          }
           onReload();
           close();
         } catch (error) {
+          console.log("Estoy en el catch");
+
           console.error(error.msg);
           errorFormulario = true;
         }
@@ -46,6 +57,8 @@ export function UserForm(props) {
     const getAvatar = () => {
       if(formik.values.fileAvatar) {
         return formik.values.avatar;
+      } else if(formik.values.avatar){
+        return `${ENV.BASE_API}/${formik.values.avatar}`
       }
       return image.noAvatar
     }
@@ -99,7 +112,7 @@ export function UserForm(props) {
         <Form.Input 
           type='password' 
           name='password' 
-          placeholder='Contraseña'
+          placeholder={`${user._id}`}
           onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.errors.password}
