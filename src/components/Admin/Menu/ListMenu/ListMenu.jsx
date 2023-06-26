@@ -7,7 +7,7 @@ import { MenuItem } from '../MenuItem'
 const menuController = new Menu();
 
 export function ListMenu(props) {
-    const { active } = props;
+    const { active, reload, onReload } = props;
     const [menus, setMenus] = useState(null);
 
     useEffect(() => {
@@ -16,17 +16,16 @@ export function ListMenu(props) {
             setMenus(null);
             const response = await menuController.getMenus(active);
             setMenus(response);
-            // console.log(response);
           } catch (error) {
             console.error(error);
           }
         })();
-      }, [active])
+      }, [active, reload])
       
     if(!menus) return <Loader  active inline='centered' />
     if(size(menus) === 0){
       return <h3>No hay ningún menu</h3>
     }
-  return map(menus, (menu) => <MenuItem key={menu._id} menu={menu} /> )
+  return map(menus, (menu) => <MenuItem key={menu._id} menu={menu} onReload={onReload} /> )
 
 }

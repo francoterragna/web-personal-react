@@ -10,14 +10,14 @@ export function Menu() {
   const [reload, setReload] = useState(false)
 
   const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
-  const onReload = () => setShowModal((prevState) => !prevState)
+  const onReload = () => setReload((prevState) => !prevState)
 
   const panes = [
     {
       menuItem: 'Menus activos',
       render: () => (
         <Tab.Pane attached={false}>
-          <ListMenu active={true} reload={reload} />
+          <ListMenu active={true} reload={reload} onReload={onReload} />
         </Tab.Pane>
       )
     },
@@ -25,7 +25,7 @@ export function Menu() {
       menuItem: 'Menus inactivos',
       render: () => (
         <Tab.Pane attached={false}>
-          <ListMenu active={false} reload={reload}/>
+          <ListMenu active={false} reload={reload} onReload={onReload} />
         </Tab.Pane>
       )
     }
@@ -41,7 +41,7 @@ export function Menu() {
         <Tab menu={{secondary:true}} panes={panes} />
       </div>
 
-      <BasicModal show={showModal} close={onOpenCloseModal} title="Crear Menu" >
+      <BasicModal show={showModal} onClose={onOpenCloseModal} title="Crear Menu" >
         <MenuForm onClose={onOpenCloseModal} onReload={onReload} />
       </BasicModal>
     </>
