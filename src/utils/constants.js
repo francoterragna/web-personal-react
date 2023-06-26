@@ -11,7 +11,8 @@ export const ENV = {
         USER: "user/create",
         USERUPDATE: "user/update",
         USERDELETE: "user/delete",
-        USERS: "user"
+        USERS: "user",
+        MENU: "menu"
     },
     JWT: {
         ACCESS: "access",

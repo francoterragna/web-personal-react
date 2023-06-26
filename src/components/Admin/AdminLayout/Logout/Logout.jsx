@@ -6,7 +6,6 @@ import { useAuth } from '../../../../hooks'
 export function Logout() {
 
     const {logout} = useAuth();
-    console.log(logout);
     const navigate = useNavigate();
 
     const onLogout = () => {
