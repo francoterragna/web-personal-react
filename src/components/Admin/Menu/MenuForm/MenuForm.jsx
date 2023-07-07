@@ -7,7 +7,6 @@ import { initialValues, validationSchema } from './MenuForm.form';
 
 const menuController = new Menu();
 
-
 export function MenuForm(props) {
     const  { onClose, onReload, menu } = props;
     const { accessToken } = useAuth();
@@ -25,7 +24,7 @@ export function MenuForm(props) {
                     active: formValue.active
                 };
 
-                if(menu){
+                if(menu !== undefined){
                     data.path = formValue.path;
                     await menuController.updateMenu( accessToken, data, menu._id);
                 } else {

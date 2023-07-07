@@ -92,9 +92,9 @@ export function UserItem(props) {
             </div>
         </div>
 
-        <BasicModal show={showModal} close={onOpenCloseModal} title={titleModal} >
+        <BasicModal show={showModal} onClose={onOpenCloseModal} title={titleModal} >
             <UserForm 
-                close={onOpenCloseModal} 
+                onClose={onOpenCloseModal} 
                 onReload={onReload} 
                 user={user} 
             />

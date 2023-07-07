@@ -1,12 +1,14 @@
 import * as Yup from 'yup';
 
 export function initialValues(menu) {
+    console.log(menu);
     return {
-        title: menu.title ? menu.title : '',
-        path: menu.path ? menu.path : '',
+        title: menu ? menu.title : '',
+        path: menu ? menu.path : '',
         protocol: 'https://',
-        active: menu.active ? menu.active : true,
-        order: menu.order ? menu.order : undefined
+        active: menu ? menu.active : true,
+        order: menu ? menu.order : undefined
+        
     }
 }
 

@@ -2,12 +2,12 @@ import * as Yup from 'yup';
 
 export function initialValues(user) {
     return {
-        avatar: user?.avatar || '' ,
+        avatar: user ? user.avatar : '' ,
         fileAvatar: null,
-        firstname: user?.firstname || '',
-        lastname: user?.lastname || '',
-        email: user?.email || '',
-        role: user?.role || '',
+        firstname: user ? user.firstname : '',
+        lastname: user ? user.lastname : '',
+        email: user ? user.email : '',
+        role: user ? user.role : '',
         password: ''
     };
 }

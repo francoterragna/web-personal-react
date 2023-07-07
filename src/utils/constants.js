@@ -12,7 +12,8 @@ export const ENV = {
         USERUPDATE: "user/update",
         USERDELETE: "user/delete",
         USERS: "user",
-        MENU: "menu"
+        MENU: "menu",
+        COURSES:"courses"
     },
     JWT: {
         ACCESS: "access",

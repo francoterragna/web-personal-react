@@ -39,12 +39,8 @@ export function Users() {
       <Tab menu={{ secondary: true }} panes={panes}/>
     </div>
 
-    <BasicModal 
-      show={showModal} 
-      close={onOpenCloseModal} 
-      title='Crear nuevo usuario'
-    >
-      <UserForm close={onOpenCloseModal} user={null} onReload={onReload} />
+    <BasicModal show={showModal} onClose={onOpenCloseModal} title='Crear nuevo usuario'>
+      <UserForm onClose={onOpenCloseModal} onReload={onReload} />
     </BasicModal>
     </>
   );

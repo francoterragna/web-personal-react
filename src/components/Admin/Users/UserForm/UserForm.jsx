@@ -14,9 +14,8 @@ const userController = new User();
 let errorFormulario = false;
 
 export function UserForm(props) {
-    const { close, onReload, user } = props;
+    const { onClose, onReload, user } = props;
     const { accessToken } = useAuth();
-    // console.log(user);
 
 
     const formik = useFormik({
@@ -29,16 +28,22 @@ export function UserForm(props) {
             console.log("Estoy en el try");
             await userController.createUser(accessToken, formValue);
           } else {
-            await userController.updateUser(accessToken, user._id, formValue)
             console.log(formValue);
+            await userController.updateUser(accessToken, user._id, formValue);
           }
           onReload();
-          close();
+          onClose();
+          return;
         } catch (error) {
           console.log("Estoy en el catch");
-
-          console.error(error.msg);
+          console.error(error);
           errorFormulario = true;
+
+          // Espero 100ms para poner la variable en false porque sino no detecta el true.
+          setTimeout(() => {
+            errorFormulario = !errorFormulario;
+          }, '100');
+          
         }
       }
     });
@@ -112,7 +117,7 @@ export function UserForm(props) {
         <Form.Input 
           type='password' 
           name='password' 
-          placeholder={`${user._id}`}
+          placeholder='Contraseña'
           onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.errors.password}

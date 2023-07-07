@@ -7,7 +7,7 @@ import './Menu.scss';
 export function Menu() {
 
   const [showModal, setShowModal] = useState(false);
-  const [reload, setReload] = useState(false)
+  const [reload, setReload] = useState(false);
 
   const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
   const onReload = () => setReload((prevState) => !prevState)
