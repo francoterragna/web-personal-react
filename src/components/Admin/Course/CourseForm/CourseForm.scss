@@ -1,0 +1,41 @@
+@import '~/src/scss/index.scss';
+
+input::placeholder {
+    color: black !important;
+}
+textarea::placeholder {
+    color: black !important;
+}
+.course-form {
+    &__miniature {
+        margin-bottom: 16px;
+
+        > div {
+            width: 100%;
+            min-height: 120px;
+            border: 2px dashed $primary;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                opacity: 0.6;
+                cursor: pointer;
+            }
+        }
+
+        > .ui.image {
+            width: 100%;
+            min-height: 120px;
+            margin: 0;
+            border: 2px dashed $primary;
+            padding: 5px;
+            &:hover {
+                opacity: 0.6;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
