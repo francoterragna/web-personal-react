@@ -85,4 +85,26 @@ export class Course {
             throw error;
         }
     }
+
+    async deleteCourse(accessToken, idCourse) {
+        try {
+            const url = `${this.baseApi}/${ENV.API_ROUTES.COURSES}/${idCourse}`;
+            const params = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'Application/json',
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }
+
+            const response = await fetch(url, params);
+            const result = response.json();
+
+            if(response.status !== 200) throw result;
+
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    }
 }

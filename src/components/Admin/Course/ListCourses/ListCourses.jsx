@@ -17,7 +17,6 @@ export function ListCourses(props) {
     (async () => {
       try {
         const response = await courseController.getCourses({page, limit:5});
-        console.log(response);
         setCourses(response.docs);
         setPagination({
           limit: response.limit,

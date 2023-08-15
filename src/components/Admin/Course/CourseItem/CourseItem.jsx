@@ -2,19 +2,36 @@ import React, { useState } from 'react';
 import { Image, Button, Icon, Confirm } from 'semantic-ui-react';
 import { BasicModal } from '../../../Shared';
 import { CourseForm } from '../CourseForm';
+import { useAuth } from '../../../../hooks';
+import { Course } from '../../../../api';
 import { ENV } from '../../../../utils';
 import './CourseItem.scss';
+
+const courseController = new Course();
 
 export function CourseItem(props) {
     const { course, onReload } = props;
     const [showModal, setShowModal] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false)
     const [titleModal, setTitleModal] = useState('');
+    const { accessToken } = useAuth();
 
     const onOpenCloseModal = () => setShowModal((prevState) => !prevState);
+    const onOpenCloseConfirm = () => setShowConfirm((prevState) => !prevState);
 
     const openUpdateCourse = () => {
         setTitleModal(`Actualizar ${course.title}`);
         onOpenCloseModal()
+    }
+
+    const onDelete = async () => {
+        try {
+            await courseController.deleteCourse(accessToken, course._id);
+            onReload();
+            onOpenCloseConfirm();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
   return (
@@ -33,7 +50,7 @@ export function CourseItem(props) {
                 <Button icon primary onClick={openUpdateCourse}>
                     <Icon name='pencil'/>
                 </Button>
-                <Button icon color='red'>
+                <Button icon color='red' onClick={onOpenCloseConfirm}>
                     <Icon name='trash' />
                 </Button>
             </div>
@@ -42,6 +59,14 @@ export function CourseItem(props) {
         <BasicModal show={showModal} onClose={onOpenCloseModal} title={titleModal}>
             <CourseForm onClose={onOpenCloseModal} onReload={onReload} course={course} />
         </BasicModal>
+
+        <Confirm
+            open={showConfirm}
+            onCancel={onOpenCloseConfirm}
+            onConfirm={onDelete}
+            content={`Eliminar el curso ${course.title}`}
+            size='mini'
+        />
     </>
   )
 }
