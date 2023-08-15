@@ -52,4 +52,37 @@ export class Course {
             throw error;
         }
     }
+
+    async updateCourse(accessToken, idCourse, data) {
+        try {
+            const formData = new FormData();
+            Object.keys(data).forEach((key) => {
+                formData.append(key, data[key])
+            });
+
+            if (data.file) {
+                formData.append('miniature', data.file);
+            }
+
+            const url = `${this.baseApi}/${ENV.API_ROUTES.COURSES}/${idCourse}`;
+
+            const params = {
+                method: 'PATCH',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                },
+                body: formData
+            };
+
+            const response = await fetch(url, params);
+            const result = await response.json();
+
+            if(response.status !== 200) throw result;
+
+            return result;
+
+        } catch (error) {
+            throw error;
+        }
+    }
 }

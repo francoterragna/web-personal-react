@@ -1,14 +1,14 @@
 import * as Yup from 'yup';
 
-export function initialValues() {
+export function initialValues(course) {
     return {
-        title: '',
-        miniature: '',
-        file: null,
-        description: '',
-        url: '',
-        price: undefined,
-        score: undefined
+        title: course?.title || '',
+        miniature: course?.miniature || '',
+        file: null, // El file nunca va a llegar del servidor, porque yo la subo desde mi PC a la imagen por lo que siempre va en nulo
+        description: course?.description ||  '',
+        url: course?.url || '',
+        price: course?.price || undefined,
+        score: course?.score || undefined
     };
 }
 

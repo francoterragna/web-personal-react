@@ -36,6 +36,13 @@ textarea::placeholder {
                 cursor: pointer;
             }
         }
+
+        >.ui.small.image {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            overflow: scroll;
+        }
     }
 
 }

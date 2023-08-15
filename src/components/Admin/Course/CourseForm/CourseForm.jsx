@@ -4,6 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import { useFormik } from 'formik';
 import { Course } from '../../../../api';
 import { useAuth } from '../../../../hooks';
+import { ENV } from '../../../../utils'; 
 import { initialValues, validationSchema } from './CourseForm.form';
 import './CourseForm.scss';
 
@@ -11,17 +12,21 @@ const courseController = new Course();
 
 export function CourseForm(props) {
 
-    const { onClose, onReload } = props;
+    const { onClose, onReload, course } = props;
 
     const {accessToken} = useAuth();
 
     const formik = useFormik({
-        initialValues: initialValues(),
+        initialValues: initialValues(course),
         validationSchema: validationSchema(),
         validationOnChange: false,
         onSubmit: async(formValue) => {
             try {
-                await courseController.createCourse(accessToken, formValue);
+                if(!course){
+                    await courseController.createCourse(accessToken, formValue);
+                } else {
+                    await courseController.updateCourse(accessToken, course._id, formValue);
+                }
 
                 //CERRAR EL MODAL
                 //REFRESCAR LA LISTA DE CURSOS
@@ -47,6 +52,8 @@ export function CourseForm(props) {
     const getMiniature = () => {
         if(formik.values.file) {
             return formik.values.miniature;
+        } else if(formik.values.miniature) {
+            return `${ENV.BASE_PATH}/${formik.values.miniature}`
         }
         return null;
     }
@@ -105,7 +112,7 @@ export function CourseForm(props) {
         </Form.Group>
 
         <Form.Button type='submit' primary fluid loading={formik.isSubmitting}>
-            Crear Curso
+            { !course ? 'Crear curso' : 'Actualizar curso' }
         </Form.Button>
     </Form>
   )

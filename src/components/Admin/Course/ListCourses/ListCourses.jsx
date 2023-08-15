@@ -8,7 +8,7 @@ import './ListCourses.scss'
 const courseController = new Course();
 
 export function ListCourses(props) {
-  const {reload} = props;
+  const { reload, onReload } = props;
   const [courses, setCourses] = useState(false);
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState();
@@ -41,7 +41,7 @@ export function ListCourses(props) {
   return (
     <div className='list-courses'>
         {map(courses, (course) => (
-          <CourseItem key={course._id} course={course} />
+          <CourseItem key={course._id} course={course} onReload={onReload}/>
         ))}
 
         <div className='list-courses__pagination'>
