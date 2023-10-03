@@ -36,7 +36,7 @@ export function Blog() {
         show={showModal}
         close={onOpenCloseModal}
         title='Crear nuevo post'
-        size='medium'
+        size='fullscreen'
       >
         <PostForm onClose={onOpenCloseModal} onReload={onReload} />
       </BasicModal>
